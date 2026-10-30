@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5b3df5">
+<meta name="robots" content="noindex">
+<title>শপোরা অ্যাডমিন</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#5b3df5;--brand2:#8b5cf6;--soft:#efeaff;--coral:#ff6b4a;--mint:#12b886;--amber:#f59f00;--sky:#1c7ed6;--ink:#14142b;--muted:#6b6b85;--bg:#f5f4fb;--card:#fff;--line:#e8e6f4;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Hind Siliguri",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:78px}
+h1,h2,h3{font-family:"Baloo Da 2","Hind Siliguri",sans-serif;line-height:1.25}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px;border-radius:8px}
+.shell{display:block}
+.side{display:none}
+.bar{position:sticky;top:0;z-index:20;background:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;box-shadow:0 2px 12px #14142b12}
+.bar h1{font-size:1.25rem;font-weight:800;flex:1}
+.ibtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem}
+.ibtn:active{background:var(--soft)}
+.badge{font-size:.75rem;background:#fff3bf;color:#8a6100;padding:2px 10px;border-radius:99px;font-weight:600}
+#view{padding:14px;max-width:1100px;margin:0 auto}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sp{flex:1}
+.btn{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-weight:600;padding:9px 18px;border-radius:99px}
+.btn.ghost{background:var(--soft);color:var(--brand)}
+.btn.red{background:#ffe3df;color:#c92a2a}
+.btn.sm{padding:5px 12px;font-size:.88rem}
+.btn:active{transform:scale(.96)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.st{background:var(--card);border-radius:var(--r);padding:14px;border:1px solid var(--line)}
+.st small{color:var(--muted)}
+.st b{display:block;font:800 1.45rem "Baloo Da 2",sans-serif;margin-top:2px}
+.st i{font-style:normal;float:right;font-size:1.5rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:12px}
+.panel h2{font-size:1.1rem;font-weight:800;margin-bottom:8px}
+.two{display:grid;gap:12px}
+@media(min-width:860px){.two{grid-template-columns:1.4fr 1fr}}
+svg text{font-family:"Hind Siliguri",sans-serif}
+.li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.li:last-child{border:0}
+.li small{color:var(--muted);display:block}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;padding:1px 10px;border-radius:99px;white-space:nowrap}
+.s-new{background:#e7f1ff;color:#1c7ed6}.s-proc{background:#fff3bf;color:#8a6100}.s-ship{background:#efeaff;color:#5b3df5}.s-done{background:#d3f9e8;color:#0b7a56}.s-cancel{background:#ffe3df;color:#c92a2a}
+.search{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff;margin:10px 0}
+.cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.c{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.c h3{font-size:1.05rem;font-weight:700;font-family:"Hind Siliguri",sans-serif}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;margin:4px 0 8px;font-size:.88rem;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:6px 14px;border-radius:99px;background:#fff;border:1.5px solid var(--line);font-weight:500;font-size:.92rem}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+select,input[type=text],input[type=number],input[type=email]{font:inherit;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.sw{position:relative;width:46px;height:26px;flex:none}
+.sw input{opacity:0;position:absolute;inset:0;width:100%;height:100%;cursor:pointer;z-index:1}
+.sw span{position:absolute;inset:0;background:#cfcbe6;border-radius:99px;transition:.2s}
+.sw span::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.sw input:checked+span{background:var(--mint)}
+.sw input:checked+span::after{transform:translateX(20px)}
+.sw input:disabled+span{opacity:.5}
+.step{display:flex;align-items:center;gap:8px}
+.step button{width:32px;height:32px;border-radius:50%;background:var(--soft);color:var(--brand);font-weight:700;font-size:1.1rem}
+.bar2{height:9px;border-radius:99px;background:var(--soft);overflow:hidden;margin-top:3px}
+.bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:99px}
+.mx{overflow-x:auto}
+.mx table{border-collapse:collapse;min-width:100%;font-size:.9rem}
+.mx th,.mx td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+.mx td:first-child,.mx th:first-child{text-align:left;position:sticky;left:0;background:#fff}
+.empty{text-align:center;color:var(--muted);padding:26px;border:2px dashed var(--line);border-radius:var(--r);background:#fff}
+label.f{display:grid;gap:3px;margin-bottom:10px;font-weight:500}
+/* নেভিগেশন */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.bnav a,.bnav button{flex:1;text-align:center;font-size:.78rem;padding:4px 2px;border-radius:12px;color:var(--muted)}
+.bnav b{display:block;font-size:1.3rem;font-weight:400;line-height:1.2}
+.bnav .on{color:var(--brand);background:var(--soft);font-weight:600}
+.scrim{position:fixed;inset:0;background:#14142b88;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:60;left:50%;bottom:0;width:100%;max-width:520px;background:#fff;border-radius:22px 22px 0 0;padding:18px 16px 22px;max-height:88vh;overflow:auto;transform:translate(-50%,110%);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.sheet.on{transform:translate(-50%,0)}
+.sheet h2{font-size:1.3rem;font-weight:800;margin-bottom:12px}
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mg a{background:var(--bg);border-radius:14px;padding:12px 4px;text-align:center;font-size:.85rem;font-weight:500}
+.mg a b{display:block;font-size:1.5rem;font-weight:400}
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:9px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:.2s;z-index:80;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(min-width:900px){
+  body{padding-bottom:0}
+  .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+  .side{display:block;background:#fff;border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+  .side .logo{font:800 1.5rem "Baloo Da 2",sans-serif;color:var(--brand);padding:4px 10px 14px}
+  .side .logo span{color:var(--coral)}
+  .side a{display:flex;gap:10px;padding:10px 12px;border-radius:12px;font-weight:500;color:var(--muted)}
+  .side a.on{background:var(--soft);color:var(--brand);font-weight:600}
+  .bnav,.menu{display:none}
+  .toast{bottom:24px}
+  .sheet{bottom:auto;top:50%;border-radius:22px;transform:translate(-50%,-40%);opacity:0;pointer-events:none}
+  .sheet.on{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <div>
+    <header class="bar">
+      <button class="ibtn menu" id="menuBtn" aria-label="সব মডিউল">☰</button>
+      <h1 id="ttl">ড্যাশবোর্ড</h1>
+      <span class="badge">নমুনা ডেটা</span>
+    </header>
+    <main id="view"></main>
+  </div>
+</div>
+<nav class="bnav" id="bnav" aria-label="নিচের মেনু"></nav>
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- সাহায্যকারী ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const bn=s=>String(s).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const tk=n=>"৳"+bn(Math.round(n||0).toLocaleString("en-US"));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const MONTHS=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+const WD=["রবি","সোম","মঙ্গল","বুধ","বৃহ","শুক্র","শনি"];
+const fmtDate=ts=>{const d=new Date(ts);return bn(d.getDate())+" "+MONTHS[d.getMonth()]};
+const DAY=864e5;
+const dayStart=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);return d.getTime()};
+
+/* ---------- ডেটা ---------- */
+const KEY="shopora-admin-v1";
+const STATUS={new:"নতুন",proc:"প্রসেসিং",ship:"শিপড",done:"ডেলিভারড",cancel:"বাতিল"};
+const PAY={cod:"ক্যাশ অন ডেলিভারি",bkash:"বিকাশ",nagad:"নগদ",card:"কার্ড (SSLCommerz)"};
+const ROLES={admin:"অ্যাডমিন",manager:"ম্যানেজার",orders:"অর্ডার স্টাফ",inventory:"ইনভেন্টরি স্টাফ"};
+const MODS=[["dash","ড্যাশবোর্ড","📊"],["products","পণ্য","🛍️"],["categories","বিভাগ","🗂️"],["brands","ব্র্যান্ড","🏷️"],["orders","অর্ডার","📦"],["customers","গ্রাহক","👥"],["inventory","ইনভেন্টরি","🏬"],["marketing","মার্কেটিং","🎟️"],["payments","পেমেন্ট","💳"],["shipping","ডেলিভারি","🚚"],["reports","রিপোর্ট","📈"],["settings","সেটিংস","⚙️"],["staff","স্টাফ ও ভূমিকা","🔐"]];
+
+function seed(){
+  const categories=[[1,"মুদি ও খাবার","🛒"],[2,"পোশাক","👕"],[3,"ইলেকট্রনিক্স","🎧"],[4,"গৃহসজ্জা","🪴"],[5,"বই ও স্টেশনারি","📚"],[6,"উপহার","🎁"]].map(a=>({id:a[0],name:a[1],emoji:a[2]}));
+  const brands=[[1,"দেশি ঘর"],[2,"তাঁতঘর"],[3,"সাউন্ডপ্লাস"],[4,"গৃহকোণ"],[5,"পাতা"],[6,"উপহারঘর"]].map(a=>({id:a[0],name:a[1]}));
+  const products=[[1,"মিনিকেট চাল ৫ কেজি",1,1,590,640,40],[2,"খাঁটি সরিষার মধু ৫০০ গ্রাম",1,1,520,0,12],[3,"সুতির পাঞ্জাবি",2,2,1250,1500,8],[4,"তাঁতের শাড়ি",2,2,2800,0,5],[5,"ওয়্যারলেস হেডফোন",3,3,1990,2490,22],[6,"পাওয়ার ব্যাংক ১০,০০০ mAh",3,3,1450,0,0],[7,"সিরামিক টব সেট",4,4,890,0,14],[8,"টেবিল ল্যাম্প",4,4,950,1100,9],[9,"হার্ডকভার ডায়েরি",5,5,320,0,30],[10,"ফাউন্টেন পেন",5,5,280,0,3],[11,"সাজানো উপহার বক্স",6,6,1100,0,11],[12,"শুভেচ্ছা কার্ড",6,6,120,0,60]].map(a=>({id:a[0],name:a[1],cat:a[2],brand:a[3],price:a[4],old:a[5],stock:a[6]}));
+  const names=[["রহিম উদ্দিন","ঢাকা"],["সুমি আক্তার","চট্টগ্রাম"],["করিম হোসেন","ঢাকা"],["নাসরিন জাহান","সিলেট"],["তানভীর আহমেদ","ঢাকা"],["মিতা রানী","খুলনা"],["ফারুক হাসান","রাজশাহী"],["শিউলি বেগম","ঢাকা"]];
+  const customers=names.map((n,i)=>({id:i+1,name:n[0],phone:"০১৭০০-০০০"+bn(100+i),city:n[1]}));
+  const now=Date.now();
+  // [গ্রাহক, [[পণ্য,সংখ্যা]], পেমেন্ট, স্ট্যাটাস, কত দিন আগে]
+  const raw=[[1,[[1,1],[2,1]],"cod","new",0],[2,[[5,1]],"bkash","proc",0],[3,[[3,2]],"nagad","new",0],[4,[[11,1],[12,3]],"card","ship",1],[5,[[8,1],[7,1]],"cod","done",1],[6,[[4,1]],"bkash","done",2],[7,[[9,2],[10,1]],"cod","done",2],[8,[[5,1],[12,2]],"card","cancel",3],[1,[[2,3]],"nagad","done",3],[2,[[1,2]],"cod","done",4],[3,[[3,1],[8,1]],"bkash","done",5],[4,[[11,2]],"cod","done",5],[5,[[7,2]],"nagad","done",6],[6,[[1,1],[9,1]],"cod","done",6]];
+  const orders=raw.map((r,i)=>{
+    const c=customers.find(x=>x.id===r[0]);
+    const items=r[1].map(([pid,q])=>{const p=products.find(x=>x.id===pid);return{pid,name:p.name,qty:q,price:p.price}});
+    return{id:1001+i,cust:c.name,phone:c.phone,city:c.city,items,pay:r[2],status:r[3],ts:now-r[4]*DAY-i*3600e3};
+  });
+  return{
+    categories,brands,products,customers,orders,
+    coupons:[{id:1,code:"WELCOME10",type:"percent",value:10,min:500,active:true},{id:2,code:"FREESHIP",type:"flat",value:60,min:999,active:true},{id:3,code:"EID100",type:"flat",value:100,min:1500,active:false}],
+    zones:[{id:1,name:"ঢাকা শহর",fee:60,days:"১–২ দিন"},{id:2,name:"ঢাকার বাইরে",fee:120,days:"৩–৫ দিন"},{id:3,name:"দুর্গম এলাকা",fee:150,days:"৫–৭ দিন"}],
+    staff:[{id:1,name:"আপনি (মালিক)",email:"owner@example.com",role:"admin"},{id:2,name:"সাবরিনা",email:"sabrina@example.com",role:"manager"},{id:3,name:"রাফি",email:"rafi@example.com",role:"orders"}],
+    perms:{manager:{products:1,categories:1,brands:1,orders:1,customers:1,inventory:1,marketing:1,payments:1,shipping:1,reports:1},orders:{orders:1,customers:1,shipping:1,payments:1},inventory:{products:1,categories:1,brands:1,inventory:1}},
+    pays:{cod:true,bkash:true,nagad:true,card:false},
+    settings:{store:"শপোরা",phone:"০১৭XX-XXXXXX",email:"care@example.com",address:"১২৩ নমুনা সড়ক, ঢাকা",low:5,free:999},
+    nid:2000
+  };
+}
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){S=null}
+if(!S||!S.products)S=seed();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const uid=()=>++S.nid;
+const catName=id=>(S.categories.find(c=>c.id===+id)||{}).name||"—";
+const brandName=id=>(S.brands.find(c=>c.id===+id)||{}).name||"—";
+const oTotal=o=>o.items.reduce((s,i)=>s+i.price*i.qty,0);
+const live=o=>o.status!=="cancel";
+
+/* ---------- সাধারণ CRUD বিবরণ ---------- */
+const CR={
+  products:{k:"products",t:"পণ্য",title:r=>r.name,
+    meta:r=>[["বিভাগ",catName(r.cat)],["ব্র্যান্ড",brandName(r.brand)],["দাম",tk(r.price)],["স্টক",bn(r.stock)]],
+    f:[["name","পণ্যের নাম","text"],["cat","বিভাগ","sel","categories"],["brand","ব্র্যান্ড","sel","brands"],["price","দাম (৳)","num"],["old","পুরনো দাম (৳, না থাকলে ০)","num"],["stock","স্টক","num"]],
+    blank:{name:"",cat:1,brand:1,price:0,old:0,stock:0}},
+  categories:{k:"categories",t:"বিভাগ",title:r=>r.emoji+" "+r.name,
+    meta:r=>[["পণ্য",bn(S.products.filter(p=>p.cat===r.id).length)+"টি"]],
+    f:[["name","বিভাগের নাম","text"],["emoji","ইমোজি","text"]],blank:{name:"",emoji:"📦"}},
+  brands:{k:"brands",t:"ব্র্যান্ড",title:r=>r.name,
+    meta:r=>[["পণ্য",bn(S.products.filter(p=>p.brand===r.id).length)+"টি"]],
+    f:[["name","ব্র্যান্ডের নাম","text"]],blank:{name:""}},
+  customers:{k:"customers",t:"গ্রাহক",title:r=>r.name,
+    meta:r=>{const os=S.orders.filter(o=>o.cust===r.name&&live(o));return[["ফোন",r.phone],["শহর",r.city],["অর্ডার",bn(os.length)],["মোট কেনা",tk(os.reduce((s,o)=>s+oTotal(o),0))]]},
+    f:[["name","নাম","text"],["phone","ফোন","text"],["city","শহর","text"]],blank:{name:"",phone:"",city:""}},
+  marketing:{k:"coupons",t:"কুপন",title:r=>r.code,toggle:"active",
+    meta:r=>[["ছাড়",r.type==="percent"?bn(r.value)+"%":tk(r.value)],["ন্যূনতম অর্ডার",tk(r.min)]],
+    f:[["code","কুপন কোড","text"],["type","ধরন","sel",[["percent","শতাংশ (%)"],["flat","নির্দিষ্ট টাকা (৳)"]]],["value","ছাড়ের পরিমাণ","num"],["min","ন্যূনতম অর্ডার (৳)","num"]],
+    blank:{code:"",type:"percent",value:10,min:0,active:true}},
+  shipping:{k:"zones",t:"ডেলিভারি জোন",title:r=>r.name,
+    meta:r=>[["চার্জ",tk(r.fee)],["সময়",r.days]],
+    f:[["name","জোনের নাম","text"],["fee","ডেলিভারি চার্জ (৳)","num"],["days","সময় (যেমন ২–৩ দিন)","text"]],blank:{name:"",fee:60,days:""}},
+  staff:{k:"staff",t:"স্টাফ",title:r=>r.name,
+    meta:r=>[["ইমেইল",r.email],["ভূমিকা",ROLES[r.role]]],
+    f:[["name","নাম","text"],["email","ইমেইল","text"],["role","ভূমিকা","sel",Object.entries(ROLES)]],blank:{name:"",email:"",role:"orders"}}
+};
+
+/* ---------- শিট ও টোস্ট ---------- */
+const sheet=$("#sheet"),scrim=$("#scrim");
+function openSheet(h){sheet.innerHTML=h;sheet.classList.add("on");scrim.classList.add("on")}
+function closeSheet(){sheet.classList.remove("on");scrim.classList.remove("on")}
+let th;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(th);th=setTimeout(()=>t.classList.remove("on"),1600)}
+scrim.onclick=closeSheet;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet()});
+
+/* ---------- ভিউ ---------- */
+const ui={of:"all",low:false};
+const V={};
+
+V.dash=()=>{
+  const t0=dayStart(Date.now());
+  const today=S.orders.filter(o=>o.ts>=t0&&live(o));
+  const rev=S.orders.filter(live).reduce((s,o)=>s+oTotal(o),0);
+  const pend=S.orders.filter(o=>o.status==="new"||o.status==="proc").length;
+  const low=S.products.filter(p=>p.stock<=S.settings.low).length;
+  const days=[];for(let i=6;i>=0;i--){const a=t0-i*DAY;days.push({l:WD[new Date(a).getDay()],v:S.orders.filter(o=>live(o)&&o.ts>=a&&o.ts<a+DAY).reduce((s,o)=>s+oTotal(o),0)})}
+  const mx=Math.max(1,...days.map(d=>d.v));
+  const bars=days.map((d,i)=>{const h=Math.round(d.v/mx*100),x=14+i*44;return `<rect x="${x}" y="${120-h}" width="30" height="${h}" rx="7" fill="${i===6?"#5b3df5":"#c9bffc"}"/><text x="${x+15}" y="138" font-size="11" text-anchor="middle" fill="#6b6b85">${d.l}</text>${d.v?`<text x="${x+15}" y="${114-h}" font-size="9" text-anchor="middle" fill="#14142b">${bn(Math.round(d.v/100)/10)}K</text>`:""}`}).join("");
+  const qty={};S.orders.filter(live).forEach(o=>o.items.forEach(i=>qty[i.name]=(qty[i.name]||0)+i.qty));
+  const top=Object.entries(qty).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const recent=[...S.orders].sort((a,b)=>b.ts-a.ts).slice(0,5);
+  return `<div class="stats">
+   <div class="st"><i>💰</i><small>আজকের বিক্রি</small><b>${tk(today.reduce((s,o)=>s+oTotal(o),0))}</b></div>
+   <div class="st"><i>📦</i><small>আজকের অর্ডার</small><b>${bn(today.length)}টি</b></div>
+   <div class="st"><i>📈</i><small>মোট আয়</small><b>${tk(rev)}</b></div>
+   <div class="st"><i>⚠️</i><small>অপেক্ষমাণ / কম স্টক</small><b>${bn(pend)} / ${bn(low)}</b></div></div>
+  <div class="two"><div class="panel"><h2>গত ৭ দিনের বিক্রি</h2><svg viewBox="0 0 330 146" width="100%" role="img" aria-label="সাত দিনের বিক্রির বার চার্ট">${bars}</svg></div>
+  <div class="panel"><h2>সবচেয়ে বেশি বিক্রি</h2>${top.map(([n,q])=>`<div class="li"><span>${esc(n)}</span><b>${bn(q)}টি</b></div>`).join("")||'<div class="empty">এখনো বিক্রি নেই</div>'}</div></div>
+  <div class="panel"><div class="row"><h2 class="sp">সাম্প্রতিক অর্ডার</h2><a class="btn ghost sm" href="#/orders">সব দেখুন</a></div>
+  ${recent.map(o=>`<div class="li"><span>#${bn(o.id)} ${esc(o.cust)}<small>${fmtDate(o.ts)} · ${PAY[o.pay]}</small></span><span style="text-align:right"><b>${tk(oTotal(o))}</b><br><span class="pill s-${o.status}">${STATUS[o.status]}</span></span></div>`).join("")}</div>`;
+};
+
+function crudView(id){
+  const c=CR[id];
+  const rows=S[c.k].map(r=>{
+    const meta=c.meta(r).map(m=>`<span>${m[0]}: <b>${esc(m[1])}</b></span>`).join("");
+    const tg=c.toggle?`<label class="sw" title="চালু/বন্ধ"><input type="checkbox" data-tg="${id}|${r.id}" ${r[c.toggle]?"checked":""} aria-label="চালু/বন্ধ"><span></span></label>`:"";
+    const q=esc((c.title(r)+" "+c.meta(r).map(m=>m[1]).join(" ")).toLowerCase());
+    return `<div class="c" data-q="${q}"><div class="row"><h3 class="sp">${esc(c.title(r))}</h3>${tg}</div><div class="meta">${meta}</div>
+      <div class="acts"><button class="btn ghost sm" data-edit="${id}|${r.id}">সম্পাদনা</button><button class="btn red sm" data-del="${id}|${r.id}">মুছুন</button></div></div>`}).join("");
+  return `<div class="row"><b class="sp">${bn(S[c.k].length)}টি ${c.t}</b><button class="btn" data-add="${id}">+ নতুন ${c.t}</button></div>
+   <input class="search" data-search placeholder="খুঁজুন" aria-label="খুঁজুন">
+   <div class="cards" id="list">${rows||`<div class="empty">কিছু নেই। উপরের বোতামে চেপে যোগ করুন।</div>`}</div>`;
+}
+["products","categories","brands","customers","marketing","shipping","staff"].forEach(id=>V[id]=()=>crudView(id)+(id==="shipping"?`<div class="panel"><h2>ফ্রি ডেলিভারি</h2><label class="f">যত টাকার অর্ডারে ফ্রি (৳)<input type="number" id="freeShip" value="${S.settings.free}"></label><button class="btn sm" data-act="savefree">সেভ করুন</button></div>`:id==="staff"?permView():""));
+
+function permView(){
+  const mods=MODS.filter(m=>m[0]!=="dash"),roles=Object.keys(ROLES);
+  return `<div class="panel"><h2>ভূমিকা অনুযায়ী অনুমতি</h2><div class="mx"><table><tr><th>মডিউল</th>${roles.map(r=>`<th>${ROLES[r]}</th>`).join("")}</tr>
+  ${mods.map(m=>`<tr><td>${m[2]} ${m[1]}</td>${roles.map(r=>`<td>${r==="admin"?'<input type="checkbox" checked disabled aria-label="অ্যাডমিনের সব অনুমতি">':`<input type="checkbox" data-perm="${r}|${m[0]}" ${(S.perms[r]||{})[m[0]]?"checked":""} aria-label="${ROLES[r]}: ${m[1]}">`}</td>`).join("")}</tr>`).join("")}</table></div></div>`;
+}
+
+V.orders=()=>{
+  const cnt=k=>k==="all"?S.orders.length:S.orders.filter(o=>o.status===k).length;
+  const list=[...S.orders].filter(o=>ui.of==="all"||o.status===ui.of).sort((a,b)=>b.ts-a.ts);
+  return `<div class="row"><b class="sp">${bn(S.orders.length)}টি অর্ডার</b><button class="btn" data-act="neworder">+ নমুনা অর্ডার</button></div>
+  <div class="chips">${["all",...Object.keys(STATUS)].map(k=>`<button class="chip ${ui.of===k?"on":""}" data-of="${k}">${k==="all"?"সব":STATUS[k]} (${bn(cnt(k))})</button>`).join("")}</div>
+  <div class="cards">${list.map(o=>`<div class="c"><div class="row"><h3 class="sp">#${bn(o.id)} · ${esc(o.cust)}</h3><b>${tk(oTotal(o))}</b></div>
+   <div class="meta"><span>${fmtDate(o.ts)}</span><span>${PAY[o.pay]}</span><span>${bn(o.items.reduce((s,i)=>s+i.qty,0))}টি পণ্য</span></div>
+   <div class="acts"><select data-st="${o.id}" aria-label="অবস্থা" style="width:auto;flex:1">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${o.status===k?"selected":""}>${v}</option>`).join("")}</select><button class="btn ghost sm" data-view="${o.id}">বিস্তারিত</button></div></div>`).join("")||'<div class="empty">এই অবস্থায় কোনো অর্ডার নেই</div>'}</div>`;
+};
+
+V.inventory=()=>{
+  const l=S.products.filter(p=>!ui.low||p.stock<=S.settings.low);
+  return `<div class="row"><b class="sp">${bn(S.products.filter(p=>p.stock<=S.settings.low).length)}টি পণ্যের স্টক কম</b><label class="row" style="gap:8px">শুধু কম স্টক <span class="sw"><input type="checkbox" data-act="lowonly" ${ui.low?"checked":""}><span></span></span></label></div>
+  <div class="cards" style="margin-top:10px">${l.map(p=>`<div class="c"><div class="row"><h3 class="sp">${esc(p.name)}</h3>${p.stock===0?'<span class="pill s-cancel">শেষ</span>':p.stock<=S.settings.low?'<span class="pill s-proc">কম</span>':'<span class="pill s-done">ঠিক আছে</span>'}</div>
+   <div class="meta"><span>${esc(catName(p.cat))}</span></div>
+   <div class="step"><button data-stk="${p.id}|-1" aria-label="কমান">−</button><b style="min-width:42px;text-align:center;font-size:1.15rem">${bn(p.stock)}</b><button data-stk="${p.id}|1" aria-label="বাড়ান">+</button><button class="btn ghost sm" data-stk="${p.id}|10">+১০</button></div></div>`).join("")||'<div class="empty">সব পণ্যের স্টক ঠিক আছে</div>'}</div>`;
+};
+
+V.payments=()=>{
+  const tx=[...S.orders].sort((a,b)=>b.ts-a.ts).slice(0,8);
+  return `<div class="panel"><h2>পেমেন্ট মাধ্যম</h2>${Object.entries(PAY).map(([k,v])=>`<div class="li" style="align-items:center"><span>${v}${k==="card"?"<small>আসল সংযোগ ব্যাকএন্ড বানানোর পর হবে</small>":""}</span><label class="sw"><input type="checkbox" data-pay="${k}" ${S.pays[k]?"checked":""} aria-label="${v}"><span></span></label></div>`).join("")}</div>
+  <div class="panel"><h2>সাম্প্রতিক লেনদেন</h2>${tx.map(o=>`<div class="li"><span>#${bn(o.id)} · ${esc(o.cust)}<small>${PAY[o.pay]} · ${fmtDate(o.ts)}</small></span><span style="text-align:right"><b>${tk(oTotal(o))}</b><br><span class="pill ${o.status==="done"?"s-done":o.status==="cancel"?"s-cancel":"s-proc"}">${o.status==="done"?"পরিশোধিত":o.status==="cancel"?"বাতিল":"অপেক্ষমাণ"}</span></span></div>`).join("")}</div>`;
+};
+
+V.reports=()=>{
+  const os=S.orders.filter(live),total=os.reduce((s,o)=>s+oTotal(o),0)||1;
+  const bycat={};os.forEach(o=>o.items.forEach(i=>{const p=S.products.find(x=>x.id===i.pid);const n=p?catName(p.cat):"অন্যান্য";bycat[n]=(bycat[n]||0)+i.price*i.qty}));
+  const bypay={};os.forEach(o=>bypay[PAY[o.pay]]=(bypay[PAY[o.pay]]||0)+oTotal(o));
+  const bars=m=>Object.entries(m).sort((a,b)=>b[1]-a[1]).map(([n,v])=>`<div style="margin-bottom:10px"><div class="row"><span class="sp">${esc(n)}</span><b>${tk(v)}</b></div><div class="bar2"><i style="width:${Math.round(v/total*100)}%"></i></div></div>`).join("");
+  const avg=os.length?total/os.length:0,canc=S.orders.length?Math.round(S.orders.filter(o=>!live(o)).length/S.orders.length*100):0;
+  return `<div class="stats"><div class="st"><small>মোট আয়</small><b>${tk(os.reduce((s,o)=>s+oTotal(o),0))}</b></div><div class="st"><small>গড় অর্ডার মূল্য</small><b>${tk(avg)}</b></div><div class="st"><small>বাতিলের হার</small><b>${bn(canc)}%</b></div><div class="st"><small>মোট অর্ডার</small><b>${bn(S.orders.length)}টি</b></div></div>
+  <div class="two"><div class="panel"><h2>বিভাগ অনুযায়ী বিক্রি</h2>${bars(bycat)}</div><div class="panel"><h2>পেমেন্ট অনুযায়ী</h2>${bars(bypay)}</div></div>
+  <div class="panel"><h2>ডাউনলোড</h2><p style="color:var(--muted);margin-bottom:8px">সব অর্ডারের তালিকা CSV ফাইলে, যা Excel বা Google Sheets-এ খোলা যায়।</p><button class="btn" data-act="csv">অর্ডার CSV ডাউনলোড</button></div>`;
+};
+
+V.settings=()=>{const s=S.settings;
+  return `<form class="panel" id="setf"><h2>দোকানের তথ্য</h2>
+  <label class="f">দোকানের নাম<input type="text" name="store" value="${esc(s.store)}"></label>
+  <label class="f">ফোন<input type="text" name="phone" value="${esc(s.phone)}"></label>
+  <label class="f">ইমেইল<input type="text" name="email" value="${esc(s.email)}"></label>
+  <label class="f">ঠিকানা<input type="text" name="address" value="${esc(s.address)}"></label>
+  <label class="f">কম স্টকের সীমা (এর নিচে হলে সতর্কতা)<input type="number" name="low" value="${s.low}"></label>
+  <button class="btn" type="submit">সেভ করুন</button></form>
+  <div class="panel"><h2>নমুনা ডেটা</h2><p style="color:var(--muted);margin-bottom:8px">এখানকার সব পরিবর্তন শুধু এই ফোনের ব্রাউজারে সেভ হয়। আসল ডেটাবেস ব্যাকএন্ড বানানোর পর যুক্ত হবে।</p><button class="btn red" data-act="reset">নমুনা ডেটায় ফিরে যান</button></div>`;};
+
+/* ---------- রাউটার ---------- */
+function route(){return (location.hash.replace("#/","")||"dash").split("?")[0]}
+function render(){
+  const id=V[route()]?route():"dash",m=MODS.find(x=>x[0]===id);
+  $("#ttl").textContent=m[2]+" "+m[1];
+  $("#view").innerHTML=V[id]();
+  $("#side").innerHTML=`<div class="logo">শপো<span>রা</span> অ্যাডমিন</div>`+MODS.map(x=>`<a href="#/${x[0]}" class="${x[0]===id?"on":""}"><span>${x[2]}</span>${x[1]}</a>`).join("");
+  const main=["dash","products","orders","inventory"];
+  $("#bnav").innerHTML=main.map(k=>{const x=MODS.find(y=>y[0]===k);return `<a href="#/${k}" class="${k===id?"on":""}"><b>${x[2]}</b>${x[1]}</a>`}).join("")+`<button id="moreBtn" class="${main.includes(id)?"":"on"}"><b>⋯</b>আরও</button>`;
+  window.scrollTo({top:0});
+}
+window.addEventListener("hashchange",()=>{closeSheet();render()});
+function moreMenu(){openSheet(`<h2>সব মডিউল</h2><div class="mg">${MODS.map(x=>`<a href="#/${x[0]}"><b>${x[2]}</b>${x[1]}</a>`).join("")}</div>`)}
+document.addEventListener("click",e=>{if(e.target.closest("#moreBtn,#menuBtn"))moreMenu()});
+
+/* ---------- ফর্ম ---------- */
+function formSheet(mod,id){
+  const c=CR[mod],row=id?S[c.k].find(r=>r.id===+id):{...c.blank};
+  const fields=c.f.map(([k,l,t,src])=>{
+    let inp;
+    if(t==="sel"){const opts=Array.isArray(src)?src:S[src].map(x=>[x.id,x.name]);inp=`<select name="${k}">${opts.map(o=>`<option value="${esc(o[0])}" ${String(row[k])===String(o[0])?"selected":""}>${esc(o[1])}</option>`).join("")}</select>`}
+    else inp=`<input type="${t==="num"?"number":"text"}" name="${k}" value="${esc(row[k])}" ${t==="num"?'min="0" inputmode="numeric"':""}>`;
+    return `<label class="f">${l}${inp}</label>`}).join("");
+  openSheet(`<h2>${id?"সম্পাদনা":"নতুন"} ${c.t}</h2><form id="frm" data-mod="${mod}" data-id="${id||""}">${fields}<div class="acts"><button class="btn" type="submit">সেভ করুন</button><button class="btn ghost" type="button" data-close>বাতিল</button></div></form>`);
+  const f=sheet.querySelector("input,select");if(f)f.focus();
+}
+document.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(e.target.id==="frm"){
+    const {mod,id}=e.target.dataset,c=CR[mod],fd=new FormData(e.target),rec={};
+    for(const [k,,t] of c.f){let v=fd.get(k);if(typeof c.blank[k]==="number")v=Number(v)||0;else if(t==="sel"&&typeof c.blank[k]==="number")v=Number(v);rec[k]=v}
+    if(!String(rec[c.f[0][0]]).trim()){toast("নাম খালি রাখা যাবে না");return}
+    if(id){Object.assign(S[c.k].find(r=>r.id===+id),rec)}else{S[c.k].push({id:uid(),...c.blank,...rec})}
+    save();closeSheet();render();toast("সেভ হয়েছে");
+  }
+  if(e.target.id==="setf"){
+    const fd=new FormData(e.target);for(const k of["store","phone","email","address"])S.settings[k]=fd.get(k);S.settings.low=Number(fd.get("low"))||0;
+    save();toast("সেটিংস সেভ হয়েছে");
+  }
+});
+
+/* ---------- অ্যাকশন ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a,[data-close]");if(!t)return;
+  const d=t.dataset;
+  if("close" in d){closeSheet();return}
+  if(d.add){formSheet(d.add);return}
+  if(d.edit){const[m,i]=d.edit.split("|");formSheet(m,i);return}
+  if(d.del){const[m,i]=d.del.split("|"),c=CR[m];
+    if(confirm("মুছে ফেলবেন? এটা ফেরত আনা যাবে না।")){S[c.k]=S[c.k].filter(r=>r.id!==+i);save();render();toast("মুছে ফেলা হয়েছে")}return}
+  if(d.of){ui.of=d.of;render();return}
+  if(d.stk){const[i,n]=d.stk.split("|"),p=S.products.find(x=>x.id===+i);p.stock=Math.max(0,p.stock+Number(n));save();render();return}
+  if(d.view){const o=S.orders.find(x=>x.id===+d.view);
+    openSheet(`<h2>অর্ডার #${bn(o.id)}</h2><div class="meta"><span>${esc(o.cust)}</span><span>${esc(o.phone)}</span><span>${esc(o.city)}</span></div>
+    ${o.items.map(i=>`<div class="li"><span>${esc(i.name)}<small>${bn(i.qty)} × ${tk(i.price)}</small></span><b>${tk(i.price*i.qty)}</b></div>`).join("")}
+    <div class="li"><b>মোট</b><b>${tk(oTotal(o))}</b></div><div class="meta"><span>${PAY[o.pay]}</span><span class="pill s-${o.status}">${STATUS[o.status]}</span><span>${fmtDate(o.ts)}</span></div>
+    <button class="btn ghost" data-close>বন্ধ করুন</button>`);return}
+  const a=d.act;
+  if(a==="neworder"){const c=S.customers[Math.floor(Math.random()*S.customers.length)],p=S.products[Math.floor(Math.random()*S.products.length)];
+    S.orders.push({id:uid(),cust:c.name,phone:c.phone,city:c.city,items:[{pid:p.id,name:p.name,qty:1,price:p.price}],pay:["cod","bkash","nagad"][Math.floor(Math.random()*3)],status:"new",ts:Date.now()});save();render();toast("নতুন নমুনা অর্ডার এসেছে")}
+  if(a==="savefree"){S.settings.free=Number($("#freeShip").value)||0;save();toast("সেভ হয়েছে")}
+  if(a==="reset"&&confirm("সব পরিবর্তন মুছে নমুনা ডেটায় ফিরবেন?")){S=seed();save();render();toast("নমুনা ডেটা ফিরেছে")}
+  if(a==="csv"){
+    const rows=[["অর্ডার","তারিখ","গ্রাহক","ফোন","শহর","পেমেন্ট","অবস্থা","মোট"],...S.orders.map(o=>[o.id,fmtDate(o.ts),o.cust,o.phone,o.city,PAY[o.pay],STATUS[o.status],oTotal(o)])];
+    const csv="﻿"+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")).join("\n");
+    const u=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})),l=document.createElement("a");l.href=u;l.download="orders.csv";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);toast("ডাউনলোড শুরু হয়েছে")}
+});
+document.addEventListener("change",e=>{
+  const t=e.target,d=t.dataset;
+  if(d.st){S.orders.find(o=>o.id===+d.st).status=t.value;save();toast("অবস্থা বদলেছে");render()}
+  if(d.tg){const[m,i]=d.tg.split("|"),c=CR[m];S[c.k].find(r=>r.id===+i)[c.toggle]=t.checked;save();toast(t.checked?"চালু হয়েছে":"বন্ধ হয়েছে")}
+  if(d.pay){S.pays[d.pay]=t.checked;save();toast("সেভ হয়েছে")}
+  if(d.perm){const[r,m]=d.perm.split("|");(S.perms[r]=S.perms[r]||{})[m]=t.checked?1:0;save();toast("অনুমতি সেভ হয়েছে")}
+  if(d.act==="lowonly"){ui.low=t.checked;render()}
+});
+document.addEventListener("input",e=>{
+  if(e.target.matches("[data-search]")){const q=e.target.value.trim().toLowerCase();document.querySelectorAll("#list .c").forEach(c=>c.style.display=c.dataset.q.includes(q)?"":"none")}
+});
+render();
+</script>
+</body>
+</html>
