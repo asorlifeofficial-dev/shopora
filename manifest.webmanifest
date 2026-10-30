@@ -1,0 +1,19 @@
+{
+  "name": "শপোরা — সব কেনাকাটা এক অ্যাপে",
+  "short_name": "শপোরা",
+  "description": "মুদি, পোশাক, ইলেকট্রনিক্স, গৃহসজ্জা, বই ও উপহার। সারা দেশে হোম ডেলিভারি।",
+  "lang": "bn",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f4fb",
+  "theme_color": "#5b3df5",
+  "categories": ["shopping"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
